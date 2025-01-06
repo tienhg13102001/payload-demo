@@ -1,5 +1,3 @@
-'use client'
-import { useRouter } from 'next/navigation'
 import React from 'react'
 
 interface Props {
@@ -8,7 +6,6 @@ interface Props {
 
 const ProtectedRoute = ({ children }: Props) => {
   const [isAuthenticated, setIsAuthenticated] = React.useState(false)
-  const router = useRouter()
 
   // check authentication state in local storage
   React.useEffect(() => {
@@ -19,7 +16,7 @@ const ProtectedRoute = ({ children }: Props) => {
   }, [])
   // if not authenticated, redirect to login page
   if (!isAuthenticated) {
-    router.push('/login')
+    window.location.href = '/login'
   }
 
   return <>{isAuthenticated ? children : ''}</>
